@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Full Calendar Example</title>
+    <!--bootstrap4 cdn-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!--react cdn-->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!---full calender cdn path-->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <!--moment cdn-->
+    <script src=" https://MomentJS.com/downloads/moment.js"></script>
+    <!--css path-->
+    <link href="/Assets/Style.css" rel="stylesheet" />
+    <link href="./Assets/lib/main.css" rel="stylesheet" />
+    <script src="./Assets/lib/main.js"></script>
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid h-100">
+      <div class="row h-100">
+        <!-- left sidebar -->
+        <div class="col-md-2 fixed pl-0 py-2 bg-light left">
+          <ul class="nav flex-md-column flex-nowrap justify-content-center">
+            <li class="nav-item">
+              <a class="nav-link text-truncate" href="#">Calendars Examples </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html"
+                >Simple Calendar Example</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index2.html"
+                >Resource Time-Grid Cal. Example</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index3.html"
+                >Resource TimeLine Cal.Example</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./index4.html"
+                >Generate Dynamic Cal. Example</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./filtercalender.html"
+                >Filter Calender Example</a
+              >
+            </li>
+          </ul>
+        </div>
+        <!-- center content -->
+        <div class="invisible col-md-2 fixed">
+          <!--ghost div to push middle section offset-->
+        </div>
+        <div class="col fluid d-flex flex-column p-0">
+          <nav
+            id="topNav"
+            class="navbar navbar-expand-md fixed-top"
+            style="background-color: #deedfb"
+          >
+            <div class="collapse navbar-collapse" id="collapsingNavbar">
+              <ul class="nav navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Full Calendar Example</a>
+                </li>
+              </ul>
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a
+                    class="nav-link page-scroll"
+                    data-toggle="modal"
+                    title="A free Bootstrap theme"
+                    href="#aboutModal"
+                    >About</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+
+          <!-- main content -->
+          <div class="flex-grow">
+            <div class="col-12 mb-4" style="margin-top: 50px">
+              <div id="root"></div>
+            </div>
+          </div>
+          <!-- /main content -->
+          <footer
+            class="navbar navbar-expand"
+            style="background-color: #deedfb"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item"><a href="#" class="nav-link">Footer</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">More</a></li>
+            </ul>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="Assets/data.js"></script>
+    <script type="text/babel">
+      //console.log(events);
+      const eventdata = [];
+      events.map((item, key) => {
+        eventdata.push({
+          id: item.session_id,
+          start: item.start,
+          end: item.end,
+          title: item.title,
+          eventColor: "#378006",
+          color: "yellow", // an option!
+          textColor: "black", // an option!
+          resourceId: "f",
+          url: item.detail_page_url,
+        });
+      });
+
+      //console.log(eventdata);
+
+      const headerToolbar = {
+        left: "promptResource promptResource1 today prev,next",
+        center: "title",
+        right: "dayGridMonth,resourceTimelineDay,timeGridWeek,listWeek",
+      };
+      const initialView = "dayGridMonth";
+      const resources = [
+        { id: "a", title: "Room A", eventColor: "green" },
+        { id: "b", title: "Room B", eventColor: "red" },
+        { id: "c", title: "Room C", eventColor: "orange" },
+        { id: "d", title: "Room D", eventColor: "green" },
+        { id: "e", title: "Room E", eventColor: "pink" },
+        { id: "f", title: "Room F", eventColor: "blue" },
+      ];
+
+      class Application extends React.Component {
+        render() {
+          return (
+            <div>
+              <Calendar />
+            </div>
+          );
+        }
+      }
+      class Calendar extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            date: new Date(),
+            eventdata: events,
+            headerToolbar: headerToolbar,
+            initialView: initialView,
+            resources: resources,
+          };
+        }
+        componentDidMount() {
+          var calendarEl = document.getElementById("calendar");
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            schedulerLicenseKey: "GPL-My-Project-Is-Open-Source",
+            aspectRatio: 1.7,
+            now: "2022-12-02",
+            scrollTime: "00:00", // undo default 6am scrollTime
+            customButtons: {
+              promptResource: {
+                text: "filter",
+                click: function () {
+                  //console.log(initialView);
+                  calendar.changeView("timeGridDay");
+                },
+              },
+              promptResource1: {
+                text: "default",
+                click: function () {
+                  console.log(initialView);
+                  calendar.changeView("resourceTimelineDay");
+                },
+              },
+            },
+            expandRows: true,
+            dayMaxEvents: true, // allow "more" link when too many events
+            resourceAreaHeaderContent: "Available Rooms",
+            headerToolbar: this.state.headerToolbar,
+            initialView: this.state.initialView,
+            resources: this.state.resources,
+            events: this.state.eventdata,
+          });
+
+          calendar.render();
+        }
+
+        render() {
+          return (
+            <>
+              <div id="calendar"></div>
+            </>
+          );
+        }
+      }
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<Application />);
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
