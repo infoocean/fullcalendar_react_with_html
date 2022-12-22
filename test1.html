@@ -102,7 +102,7 @@
         return { mytimeslots };
       }
 
-      var getDaysArray = function (start, end) {
+      var getDaysArray = function (start, end, session_name, resources_id) {
         for (
           var arr = [], dt = new Date(start);
           dt <= new Date(end);
@@ -119,11 +119,13 @@
           const timeslotslgh = timeslots.mytimeslots.length;
           for (var i = 0; i < timeslotslgh; i++) {
             arr.push({
-              startdate:
+              title: session_name,
+              resourceId: resources_id,
+              start:
                 moment(new Date(dt)).format("YYYY-MM-DD") +
                 " " +
                 timeslots.mytimeslots[i].start_time,
-              enddate:
+              end:
                 moment(new Date(dt)).format("YYYY-MM-DD") +
                 " " +
                 timeslots.mytimeslots[i].end_time,
@@ -172,12 +174,23 @@
           //     new Date("2023-03-31 12:00:00")
           //   );
 
-          var daylist = getDaysArray(
-            new Date(start_date_time),
-            new Date(end_date_time)
-          );
+          //   var daylist = getDaysArray(
+          //     new Date(start_date_time),
+          //     new Date(end_date_time),
+          //     session_name,
+          //     resources_id
+          //   );
 
-          console.log(daylist);
+          //console.log(daylist);
+
+          jsondt.push(
+            getDaysArray(
+              new Date(start_date_time),
+              new Date(end_date_time),
+              session_name,
+              resources_id
+            )
+          );
 
           //const json = getDaysArray(start_date_time, end_date_time);
 
@@ -230,6 +243,7 @@
           //   }
         }
       }
+      console.log(jsondt);
     </script>
   </body>
 </html>
