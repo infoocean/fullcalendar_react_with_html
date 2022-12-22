@@ -240,14 +240,14 @@
       //fn for get start date format
       function getstartdate(start_date) {
         var currDate = new Date(start_date);
-        return moment(currDate.setDate(currDate.getDate() + 1)).format(
+        return moment(currDate.setDate(currDate.getDate()-1 + 1)).format(
           "YYYY-MM-DD"
         );
       }
       //fn for get end date format
       function getenddate(end_date) {
         var currDate = new Date(end_date);
-        return moment(currDate.setDate(currDate.getDate() + 1)).format(
+        return moment(currDate.setDate(currDate.getDate()-1 + 1)).format(
           "YYYY-MM-DD"
         );
       }

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--react cdn-->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!---full calender cdn path-->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <!--moment cdn-->
+    <script src=" https://MomentJS.com/downloads/moment.js"></script>
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>FullCalendar</title>
+  </head>
+  <body>
+    <script>
+      //get number of days betweeen two dates function
+      function getnumofdays(date1, date2) {
+        //console.log(date1, date2);
+        date1 = new Date(moment(date1).format("YYYY-MM-DD"));
+        date2 = new Date(moment(date2).format("YYYY-MM-DD"));
+        //calculate time difference
+        var time_difference = date2.getTime() - date1.getTime();
+        //calculate days difference by dividing total milliseconds in a day
+        var days_difference = time_difference / (1000 * 60 * 60 * 24);
+        return days_difference + 1;
+      }
+
+      //fn for get start date format
+      function getstartdate(start_date) {
+        //console.log(start_date);
+        var currDate = new Date(start_date);
+        console.log(
+          moment(currDate.setDate(currDate.getDate() - 1 + 1)).format(
+            "YYYY-MM-DD"
+          )
+        );
+        return moment(currDate.setDate(currDate.getDate() - 1 + 1)).format(
+          "YYYY-MM-DD"
+        );
+      }
+      //fn for get end date format
+      function getenddate(end_date) {
+        //console.log(end_date);
+        var currDate = new Date(end_date);
+        return moment(currDate.setDate(currDate.getDate() + 1)).format(
+          "YYYY-MM-DD"
+        );
+      }
+
+      //get time slots between two times
+      function addMinutes(time, minutes) {
+        var date = new Date(
+          new Date("01/01/2015 " + time).getTime() + minutes * 60000
+        );
+        var tempTime =
+          (date.getHours().toString().length == 1
+            ? "0" + date.getHours()
+            : date.getHours()) +
+          ":" +
+          (date.getMinutes().toString().length == 1
+            ? "0" + date.getMinutes()
+            : date.getMinutes()) +
+          ":" +
+          (date.getSeconds().toString().length == 1
+            ? "0" + date.getSeconds()
+            : date.getSeconds());
+        return tempTime;
+      }
+
+      function gettimeslots(start_time, end_time) {
+        //console.log(start_time, end_time);
+        var starttime = start_time;
+        var interval = "30";
+        var endtime = end_time;
+        var timeslots = [starttime];
+        while (starttime != endtime) {
+          starttime = addMinutes(starttime, interval);
+          timeslots.push(starttime);
+        }
+        const perChunk = 2;
+        const inputArray = timeslots;
+        const results = inputArray.reduce((resultArray, item, index) => {
+          const chunkIndex = Math.floor(index / perChunk);
+          if (!resultArray[chunkIndex]) {
+            resultArray[chunkIndex] = [];
+          }
+          resultArray[chunkIndex].push(item);
+
+          return resultArray;
+        }, []);
+        const mytimeslots = [];
+        const lgh = results.length;
+        results.slice(0, lgh - 1).map((items, key) => {
+          mytimeslots.push({
+            start_time: items[0],
+            end_time: items[1],
+          });
+        });
+        return { mytimeslots };
+      }
+
+      var getDaysArray = function (start, end) {
+        for (
+          var arr = [], dt = new Date(start);
+          dt <= new Date(end);
+          dt.setDate(dt.getDate() + 1)
+        ) {
+          const start_time = moment(start).format("HH:mm:ss");
+          const end_time = moment(end).format("HH:mm:ss");
+          //console.log(start_time, end_time);
+          const timeslots = gettimeslots(start_time, end_time);
+          //console.log(timeslots);
+          //console.log(timeslots.mytimeslots);
+          //console.log(timeslots.mytimeslots[0].start_time);
+          //console.log(timeslots.mytimeslots.length);
+          const timeslotslgh = timeslots.mytimeslots.length;
+          for (var i = 0; i < timeslotslgh; i++) {
+            arr.push({
+              startdate:
+                moment(new Date(dt)).format("YYYY-MM-DD") +
+                " " +
+                timeslots.mytimeslots[i].start_time,
+              enddate:
+                moment(new Date(dt)).format("YYYY-MM-DD") +
+                " " +
+                timeslots.mytimeslots[i].end_time,
+            });
+          }
+        }
+        return arr;
+      };
+      //   var daylist = getDaysArray(
+      //     new Date("2022-06-17 08:00:00"),
+      //     new Date("2022-09-17 16:00:00")
+      //   );
+      //   console.log(
+      //     "Number of Days = ",
+      //     getnumofdays("2023-01-01", "2023-03-31")
+      //   );
+      //   console.log(daylist);
+    </script>
+
+    <script src="Assets/data1.js"></script>
+    <script>
+      const jsondt = [];
+      //console.log(sessions);
+      for (let key in sessions) {
+        var itreatsessions = sessions[key];
+        //console.log(itreatsessions);
+        const session_name = itreatsessions.Session_Name;
+        //console.log(session_name);
+        const timeSlots = itreatsessions.All_Time;
+        //console.log(timeSlots);
+        const timeslotslength = timeSlots.length;
+        //console.log(timeslotslength);
+        for (var i = 0; i < timeslotslength; i++) {
+          const resources_id = timeSlots[i].ID;
+          //console.log("resource_id : ", resources_id);
+          const start_date_time =
+            timeSlots[i].start_date + " " + timeSlots[i].time_from;
+          const end_date_time =
+            timeSlots[i].end_date + " " + timeSlots[i].time_to;
+
+          //   console.log(start_date_time);
+          //   console.log(end_date_time);
+
+          //   var daylist = getDaysArray(
+          //     new Date("2023-01-01 9:00:00"),
+          //     new Date("2023-03-31 12:00:00")
+          //   );
+
+          var daylist = getDaysArray(
+            new Date(start_date_time),
+            new Date(end_date_time)
+          );
+
+          console.log(daylist);
+
+          //const json = getDaysArray(start_date_time, end_date_time);
+
+          //console.log(json);
+
+          //console.log(start_date_time, end_date_time);
+
+          //   const num_of_days = getnumofdays(
+          //     time[i].start_date + " " + time[i].time_from,
+          //     time[i].end_date + " " + time[i].time_to
+          //   );
+          //   const resources_id = time[i].ID;
+          //   const devidetimeslots1 = gettimeslots(
+          //     time && time[i] && time[i].time_from,
+          //     time && time[i] && time[i].time_to
+          //   );
+          //   for (
+          //     var j = moment(time && time[i] && time[i].start_date).format("D");
+          //     j <
+          //     num_of_days +
+          //       Number(moment(time && time[i] && time[i].start_date).format("D"));
+          //     j++
+          //   ) {
+          //     for (var k = 0; k < devidetimeslots1.lgh - 1; k++) {
+          //       jsondatass.push({
+          //         title: session_name,
+          //         resourceId: resources_id,
+          //         start:
+          //           getstartdate(
+          //             moment(time && time[j] && time[j].start_date).format(
+          //               "YYYY-MM"
+          //             ) +
+          //               "-" +
+          //               j
+          //           ) +
+          //           " " +
+          //           devidetimeslots1.mytimeslots[k].start_time,
+          //         end:
+          //           getenddate(
+          //             moment(time && time[j] && time[j].start_date).format(
+          //               "YYYY-MM"
+          //             ) +
+          //               "-" +
+          //               j
+          //           ) +
+          //           " " +
+          //           devidetimeslots1.mytimeslots[k].end_time,
+          //       });
+          //     }
+          //   }
+        }
+      }
+    </script>
+  </body>
+</html>

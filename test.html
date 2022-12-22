@@ -10,8 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
     <!--moment cdn-->
     <script src=" https://MomentJS.com/downloads/moment.js"></script>
-    <!--css path-->
-    <link href="/Assets/Style.css" rel="stylesheet" />
     <!-- Don't use this in production: -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <title>FullCalendar</title>
@@ -21,173 +19,173 @@
     <script>
       //session entry
 
-      const resources = [
-        { id: "a", title: "RA", eventColor: "Red" },
-        { id: "b", title: "RB", eventColor: "Blue" },
-      ];
+      // const resources = [
+      //   { id: "a", title: "RA", eventColor: "Red" },
+      //   { id: "b", title: "RB", eventColor: "Blue" },
+      // ];
 
-      const data = [
-        {
-          sessionA: [
-            {
-              title: "C++ Session",
-              RA: [
-                { resources: "a" },
-                {
-                  start_date_time: "2022-12-01 09:00:00",
-                  end_date_time: "2023-01-01 12:00:00",
-                },
-                {
-                  start_date_time: "2022-12-01 14:00:00",
-                  end_date_time: "2023-01-01 15:00:00",
-                },
-                {
-                  start_date_time: "2022-12-26 14:00:00",
-                  end_date_time: "2022-12-31 15:00:00",
-                },
-              ],
-              RB: [
-                { resources: "b" },
-                {
-                  start_date_time: "2022-12-01 09:00:00",
-                  end_date_time: "2023-01-01 12:00:00",
-                },
-                {
-                  start_date_time: "2022-12-01 14:00:00",
-                  end_date_time: "2023-01-01 15:00:00",
-                },
-                {
-                  start_date_time: "2022-12-26 14:00:00",
-                  end_date_time: "2022-12-31 15:00:00",
-                },
-              ],
-            },
-          ],
-          sessionB: [
-            {
-              title: "Java Session",
-              RA: [
-                { resources: "a" },
-                {
-                  start_date_time: "2022-12-01 16:00:00",
-                  end_date_time: "2023-01-01 18:00:00",
-                },
-                {
-                  start_date_time: "2022-12-01 18:00:00",
-                  end_date_time: "2023-01-01 20:00:00",
-                },
-                {
-                  start_date_time: "2022-12-26 20:00:00",
-                  end_date_time: "2022-12-31 22:00:00",
-                },
-              ],
-              RB: [
-                { resources: "b" },
-                {
-                  start_date_time: "2022-12-01 16:00:00",
-                  end_date_time: "2023-01-01 18:00:00",
-                },
-                {
-                  start_date_time: "2022-12-01 18:00:00",
-                  end_date_time: "2023-01-01 20:00:00",
-                },
-                {
-                  start_date_time: "2022-12-26 20:00:00",
-                  end_date_time: "2022-12-31 22:00:00",
-                },
-              ],
-            },
-          ],
-        },
-      ];
+      // const data = [
+      //   {
+      //     sessionA: [
+      //       {
+      //         title: "C++ Session",
+      //         RA: [
+      //           { resources: "a" },
+      //           {
+      //             start_date_time: "2022-12-01 09:00:00",
+      //             end_date_time: "2023-01-01 12:00:00",
+      //           },
+      //           {
+      //             start_date_time: "2022-12-01 14:00:00",
+      //             end_date_time: "2023-01-01 15:00:00",
+      //           },
+      //           {
+      //             start_date_time: "2022-12-26 14:00:00",
+      //             end_date_time: "2022-12-31 15:00:00",
+      //           },
+      //         ],
+      //         RB: [
+      //           { resources: "b" },
+      //           {
+      //             start_date_time: "2022-12-01 09:00:00",
+      //             end_date_time: "2023-01-01 12:00:00",
+      //           },
+      //           {
+      //             start_date_time: "2022-12-01 14:00:00",
+      //             end_date_time: "2023-01-01 15:00:00",
+      //           },
+      //           {
+      //             start_date_time: "2022-12-26 14:00:00",
+      //             end_date_time: "2022-12-31 15:00:00",
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //     sessionB: [
+      //       {
+      //         title: "Java Session",
+      //         RA: [
+      //           { resources: "a" },
+      //           {
+      //             start_date_time: "2022-12-01 16:00:00",
+      //             end_date_time: "2023-01-01 18:00:00",
+      //           },
+      //           {
+      //             start_date_time: "2022-12-01 18:00:00",
+      //             end_date_time: "2023-01-01 20:00:00",
+      //           },
+      //           {
+      //             start_date_time: "2022-12-26 20:00:00",
+      //             end_date_time: "2022-12-31 22:00:00",
+      //           },
+      //         ],
+      //         RB: [
+      //           { resources: "b" },
+      //           {
+      //             start_date_time: "2022-12-01 16:00:00",
+      //             end_date_time: "2023-01-01 18:00:00",
+      //           },
+      //           {
+      //             start_date_time: "2022-12-01 18:00:00",
+      //             end_date_time: "2023-01-01 20:00:00",
+      //           },
+      //           {
+      //             start_date_time: "2022-12-26 20:00:00",
+      //             end_date_time: "2022-12-31 22:00:00",
+      //           },
+      //         ],
+      //       },
+      //     ],
+      //   },
+      // ];
 
-      //console.log(data);
-      const jsondatas = [];
+      // //console.log(data);
+      // const jsondatas = [];
 
-      for (let key in data) {
-        var sessions = data[key];
-        //console.log(sessions);
-        for (let rooms in sessions) {
-          var room_time_slots = sessions[rooms];
-          const title = room_time_slots[0].title;
-          for (var single_room_slot in room_time_slots) {
-            var timings = room_time_slots[single_room_slot];
-            //console.log(timings);
-            for (var each_slot_timing in timings) {
-              var time_slots = timings[each_slot_timing];
-              //console.log(time_slots);
-              const rid = time_slots[0].resources;
-              //console.log(rid);
-              const lgh = time_slots.length;
-              //console.log(lgh);
-              for (var i = 0; i <= lgh; i++) {
-                const get_num_of_days = getnumofdays(
-                  time_slots && time_slots[i] && time_slots[i].start_date_time,
-                  time_slots && time_slots[i] && time_slots[i].end_date_time
-                );
-                //console.log(get_num_of_days);
-                const devidetimeslots = gettimeslots(
-                  moment(
-                    time_slots && time_slots[i] && time_slots[i].start_date_time
-                  ).format("HH:mm:ss"),
-                  moment(
-                    time_slots && time_slots[i] && time_slots[i].end_date_time
-                  ).format("HH:mm:ss")
-                );
-                //console.log(devidetimeslots);
-                for (
-                  var j = moment(
-                    time_slots && time_slots[i] && time_slots[i].start_date_time
-                  ).format("D");
-                  j <
-                  get_num_of_days +
-                    Number(
-                      moment(
-                        time_slots &&
-                          time_slots[i] &&
-                          time_slots[i].start_date_time
-                      ).format("D")
-                    );
-                  j++
-                ) {
-                  for (var k = 0; k < devidetimeslots.lgh - 1; k++) {
-                    jsondatas.push({
-                      title: title,
-                      resourceId: rid,
-                      start:
-                        getstartdate(
-                          moment(
-                            time_slots &&
-                              time_slots[j] &&
-                              time_slots[j].start_date_time
-                          ).format("YYYY-MM") +
-                            "-" +
-                            j
-                        ) +
-                        " " +
-                        devidetimeslots.mytimeslots[k].start_time,
-                      end:
-                        getenddate(
-                          moment(
-                            time_slots &&
-                              time_slots[j] &&
-                              time_slots[j].start_date_time
-                          ).format("YYYY-MM") +
-                            "-" +
-                            j
-                        ) +
-                        " " +
-                        devidetimeslots.mytimeslots[k].end_time,
-                    });
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      // for (let key in data) {
+      //   var sessions = data[key];
+      //   //console.log(sessions);
+      //   for (let rooms in sessions) {
+      //     var room_time_slots = sessions[rooms];
+      //     const title = room_time_slots[0].title;
+      //     for (var single_room_slot in room_time_slots) {
+      //       var timings = room_time_slots[single_room_slot];
+      //       //console.log(timings);
+      //       for (var each_slot_timing in timings) {
+      //         var time_slots = timings[each_slot_timing];
+      //         //console.log(time_slots);
+      //         const rid = time_slots[0].resources;
+      //         //console.log(rid);
+      //         const lgh = time_slots.length;
+      //         //console.log(lgh);
+      //         for (var i = 0; i <= lgh; i++) {
+      //           const get_num_of_days = getnumofdays(
+      //             time_slots && time_slots[i] && time_slots[i].start_date_time,
+      //             time_slots && time_slots[i] && time_slots[i].end_date_time
+      //           );
+      //           //console.log(get_num_of_days);
+      //           const devidetimeslots = gettimeslots(
+      //             moment(
+      //               time_slots && time_slots[i] && time_slots[i].start_date_time
+      //             ).format("HH:mm:ss"),
+      //             moment(
+      //               time_slots && time_slots[i] && time_slots[i].end_date_time
+      //             ).format("HH:mm:ss")
+      //           );
+      //           //console.log(devidetimeslots);
+      //           for (
+      //             var j = moment(
+      //               time_slots && time_slots[i] && time_slots[i].start_date_time
+      //             ).format("D");
+      //             j <
+      //             get_num_of_days +
+      //               Number(
+      //                 moment(
+      //                   time_slots &&
+      //                     time_slots[i] &&
+      //                     time_slots[i].start_date_time
+      //                 ).format("D")
+      //               );
+      //             j++
+      //           ) {
+      //             for (var k = 0; k < devidetimeslots.lgh - 1; k++) {
+      //               jsondatas.push({
+      //                 title: title,
+      //                 resourceId: rid,
+      //                 start:
+      //                   getstartdate(
+      //                     moment(
+      //                       time_slots &&
+      //                         time_slots[j] &&
+      //                         time_slots[j].start_date_time
+      //                     ).format("YYYY-MM") +
+      //                       "-" +
+      //                       j
+      //                   ) +
+      //                   " " +
+      //                   devidetimeslots.mytimeslots[k].start_time,
+      //                 end:
+      //                   getenddate(
+      //                     moment(
+      //                       time_slots &&
+      //                         time_slots[j] &&
+      //                         time_slots[j].start_date_time
+      //                     ).format("YYYY-MM") +
+      //                       "-" +
+      //                       j
+      //                   ) +
+      //                   " " +
+      //                   devidetimeslots.mytimeslots[k].end_time,
+      //               });
+      //             }
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
 
-      console.log(jsondatas);
+      //console.log(jsondatas);
 
       //get number of days betweeen two dates function
       function getnumofdays(date1, date2) {
@@ -203,19 +201,24 @@
 
       //fn for get start date format
       function getstartdate(start_date) {
-        //console.log(start_date);
+        console.log(start_date);
         var currDate = new Date(start_date);
+        console.log(
+          moment(currDate.setDate(currDate.getDate() + 1)).format("YYYY-MM-DD")
+        );
         return moment(currDate.setDate(currDate.getDate() + 1)).format(
           "YYYY-MM-DD"
         );
       }
       //fn for get end date format
       function getenddate(end_date) {
+        //console.log(end_date);
         var currDate = new Date(end_date);
         return moment(currDate.setDate(currDate.getDate() + 1)).format(
           "YYYY-MM-DD"
         );
       }
+
       //get time slots between two times
       function addMinutes(time, minutes) {
         var date = new Date(
@@ -235,7 +238,9 @@
             : date.getSeconds());
         return tempTime;
       }
+
       function gettimeslots(start_time, end_time) {
+        //console.log(start_time, end_time);
         var starttime = start_time;
         var interval = "30";
         var endtime = end_time;
@@ -270,7 +275,79 @@
   </body>
 </html>
 
+<script src="Assets/data1.js"></script>
 <script>
+  console.log(jsondata);
+  const jsondatass = [];
+  for (let key in jsondata) {
+    var sessions = jsondata[key];
+    //console.log(sessions);
+    const session_name = sessions.Session_name;
+    const time = sessions.timeslots;
+    console.log(time);
+    const timeslotslength = time.length;
+    //console.log(timeslotslength);
+    for (var i = 0; i < timeslotslength; i++) {
+      const num_of_days = getnumofdays(
+        time[i].start_date + " " + time[i].time_from,
+        time[i].end_date + " " + time[i].time_to
+      );
+
+      const resources_id = time[i].ID;
+      //console.log(resources_id);
+
+      console.log(num_of_days);
+
+      console.log(time && time[i] && time[i].time_from);
+      console.log(time && time[i] && time[i].time_to);
+
+      const devidetimeslots1 = gettimeslots(
+        time && time[i] && time[i].time_from,
+        time && time[i] && time[i].time_to
+      );
+      console.log(devidetimeslots1);
+
+      //console.log(moment(time && time[i] && time[i].start_date).format("D"));
+
+      for (
+        var j = moment(time && time[i] && time[i].start_date).format("D");
+        j <
+        num_of_days +
+          Number(moment(time && time[i] && time[i].start_date).format("D"));
+        j++
+      ) {
+        for (var k = 0; k < devidetimeslots1.lgh - 1; k++) {
+          jsondatass.push({
+            title: session_name,
+            resourceId: resources_id,
+            start:
+              getstartdate(
+                moment(time && time[j] && time[j].start_date).format(
+                  "YYYY-MM"
+                ) +
+                  "-" +
+                  j
+              ) +
+              " " +
+              devidetimeslots1.mytimeslots[k].start_time,
+            end:
+              getenddate(
+                moment(time && time[j] && time[j].start_date).format(
+                  "YYYY-MM"
+                ) +
+                  "-" +
+                  j
+              ) +
+              " " +
+              devidetimeslots1.mytimeslots[k].end_time,
+          });
+        }
+      }
+    }
+  }
+
+  console.log(jsondatass);
+
   // const jsondata = [];
   // for (let key in data) {
   //   var sessions = data[key];
