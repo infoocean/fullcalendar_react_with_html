@@ -13,6 +13,7 @@
     <script src=" https://MomentJS.com/downloads/moment.js"></script>
     <!-- Don't use this in production: -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>Full Calendar Example</title>
   </head>
   <body>
@@ -240,14 +241,14 @@
       //fn for get start date format
       function getstartdate(start_date) {
         var currDate = new Date(start_date);
-        return moment(currDate.setDate(currDate.getDate()-1 + 1)).format(
+        return moment(currDate.setDate(currDate.getDate() - 1 + 1)).format(
           "YYYY-MM-DD"
         );
       }
       //fn for get end date format
       function getenddate(end_date) {
         var currDate = new Date(end_date);
-        return moment(currDate.setDate(currDate.getDate()-1 + 1)).format(
+        return moment(currDate.setDate(currDate.getDate() - 1 + 1)).format(
           "YYYY-MM-DD"
         );
       }
@@ -311,6 +312,7 @@
           );
         }
       }
+
       class Calendar extends React.Component {
         constructor() {
           super();
