@@ -126,14 +126,27 @@
     <script>
       console.log(results);
       const jsondt = [];
+      const daily = [];
       const withoutNullresults = results.filter((filterdata) => {
         return filterdata.All_Time.length !== 0;
       });
       withoutNullresults &&
         withoutNullresults.map((sessions, key) => {
           //console.log(sessions);
-          console.log(sessions.All_Time);
+          //console.log(sessions.All_Time);
           //console.log(sessions.Session_Name);
+          const dt = sessions.All_Time;
+          //console.log(dt.length);
+
+          dt.map((item, key) => {
+            //console.log("is repeat daily", item.is_repeat_daily);
+
+            if (item.is_repeat_daily === "1") {
+              //console.log(item);
+              daily.push({ item });
+            }
+          });
+
           //console.log(sessions.All_Time);
           //   sessions.All_Time.map((item, key) => {
           //     const start_date_time = item.start_date + " " + item.time_from;
@@ -197,6 +210,8 @@
       //   });
 
       console.log(jsondt);
+
+      console.log(daily);
 
       //   const jsondt = [];
       //   //console.log(results);
