@@ -169,18 +169,6 @@
           //   console.log(start_date_time);
           //   console.log(end_date_time);
 
-          //   var daylist = getDaysArray(
-          //     new Date("2023-01-01 9:00:00"),
-          //     new Date("2023-03-31 12:00:00")
-          //   );
-
-          //   var daylist = getDaysArray(
-          //     new Date(start_date_time),
-          //     new Date(end_date_time),
-          //     session_name,
-          //     resources_id
-          //   );
-
           //console.log(daylist);
 
           jsondt.push(
@@ -191,56 +179,6 @@
               resources_id
             )
           );
-
-          //const json = getDaysArray(start_date_time, end_date_time);
-
-          //console.log(json);
-
-          //console.log(start_date_time, end_date_time);
-
-          //   const num_of_days = getnumofdays(
-          //     time[i].start_date + " " + time[i].time_from,
-          //     time[i].end_date + " " + time[i].time_to
-          //   );
-          //   const resources_id = time[i].ID;
-          //   const devidetimeslots1 = gettimeslots(
-          //     time && time[i] && time[i].time_from,
-          //     time && time[i] && time[i].time_to
-          //   );
-          //   for (
-          //     var j = moment(time && time[i] && time[i].start_date).format("D");
-          //     j <
-          //     num_of_days +
-          //       Number(moment(time && time[i] && time[i].start_date).format("D"));
-          //     j++
-          //   ) {
-          //     for (var k = 0; k < devidetimeslots1.lgh - 1; k++) {
-          //       jsondatass.push({
-          //         title: session_name,
-          //         resourceId: resources_id,
-          //         start:
-          //           getstartdate(
-          //             moment(time && time[j] && time[j].start_date).format(
-          //               "YYYY-MM"
-          //             ) +
-          //               "-" +
-          //               j
-          //           ) +
-          //           " " +
-          //           devidetimeslots1.mytimeslots[k].start_time,
-          //         end:
-          //           getenddate(
-          //             moment(time && time[j] && time[j].start_date).format(
-          //               "YYYY-MM"
-          //             ) +
-          //               "-" +
-          //               j
-          //           ) +
-          //           " " +
-          //           devidetimeslots1.mytimeslots[k].end_time,
-          //       });
-          //     }
-          //   }
         }
       }
       console.log(jsondt);

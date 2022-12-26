@@ -46,7 +46,6 @@
             : date.getSeconds());
         return tempTime;
       }
-
       function gettimeslots(start_time, end_time) {
         //console.log(start_time, end_time);
         var starttime = start_time;
@@ -124,142 +123,77 @@
 
     <script src="Assets/data2.js"></script>
     <script>
-      console.log(results);
-      const jsondt = [];
-      const daily = [];
-      const withoutNullresults = results.filter((filterdata) => {
-        return filterdata.All_Time.length !== 0;
-      });
-      withoutNullresults &&
-        withoutNullresults.map((sessions, key) => {
-          //console.log(sessions);
-          //console.log(sessions.All_Time);
-          //console.log(sessions.Session_Name);
-          const dt = sessions.All_Time;
-          //console.log(dt.length);
-
-          dt.map((item, key) => {
-            //console.log("is repeat daily", item.is_repeat_daily);
-
-            if (item.is_repeat_daily === "1") {
-              //console.log(item);
-              daily.push({ item });
-            }
-          });
-
-          //console.log(sessions.All_Time);
-          //   sessions.All_Time.map((item, key) => {
-          //     const start_date_time = item.start_date + " " + item.time_from;
-          //     const end_date_time = item.end_date + " " + item.time_to;
-          //     jsondt.push(
-          //       getDaysArray(
-          //         new Date(start_date_time),
-          //         new Date("2024-01-01 12:00:00"),
-          //         (session_name = ""),
-          //         (resources_id = "")
-          //       )
-          //     );
-          //   });
+      function loadDelayed() {
+        //console.log(results);
+        const jsondt = [];
+        const withoutNullresults = results.filter((filterdata) => {
+          return filterdata.All_Time.length !== 0;
         });
 
-      //   asyncForEach(results, function (el, key) {
-      //     //console.log(el, key);
+        //console.log(withoutNullresults);
 
-      //     if (el.All_Time[0].ID > 0) {
-      //       const session_name = el.Session_Name;
-      //       //console.log(session_name);
-      //       const timeslots = el.All_Time;
-      //       //console.log(timeslots);
-      //       timeslots.map((item, key) => {
-      //         //console.log(item);
+        withoutNullresults &&
+          withoutNullresults.map((sessions, key) => {
+            //console.log(sessions);
+            const sessionname = sessions.Session_Name;
+            //console.log(sessions.All_Time);
+            //console.log(sessions.Session_Name);
+            const dt = sessions.All_Time;
+            //console.log(dt.length);
+            const timeslotslength = dt.length;
+            for (var i = 0; i < timeslotslength; i++) {
+              //console.log("hiii");
+              //console.log(i);
+              //console.log(dt[i]);
+              const start_date_time = dt[i].start_date + " " + dt[i].time_from;
+              const end_date_time = dt[i].end_date + " " + dt[i].time_to;
+              //console.log(" " + i + " ", start_date_time, end_date_time);
+              const resourceId = dt[i].ID;
+              jsondt.push(
+                getDaysArray(
+                  new Date(start_date_time),
+                  new Date(end_date_time),
+                  (session_name = sessionname),
+                  (resources_id = resourceId)
+                )
+              );
+            }
+            // dt.map((item, key) => {
+            //   //console.log(item);
+            //   const start_date_time = item.start_date + " " + item.time_from;
+            //   const end_date_time = item.end_date + " " + item.time_to;
+            //   //console.log(start_date_time, end_date_time);
+            //   jsondt.push(
+            //     getDaysArray(
+            //       new Date(start_date_time),
+            //       new Date(end_date_time),
+            //       (session_name = ""),
+            //       (resources_id = "")
+            //     )
+            //   );
+            // });
+          });
+        //console.log(jsondt);
 
-      //         const resources_id = item.ID === undefined ? "" : item.ID;
-      //         //console.log("resource_id : ", resources_id);
-      //         const start_date_time = item.start_date + " " + item.time_from;
-      //         const end_date_time = item.end_date + " " + item.time_to;
+        const res = [];
+        //console.log(jsondt.length);
+        jsondt.map((val, key) => {
+          //console.log(val);
+          val.map((item, key) => {
+            //console.log(item);
+            res.push({
+              resourceId: item.resourceId,
+              title: item.title,
+              start: item.start,
+              end: item.end,
+            });
+          });
+        });
 
-      //         //console.log(start_date_time);
-      //         //console.log("2024-01-01 12:00:00");
-
-      //         //   var daylist = getDaysArray(
-      //         //     new Date("2023-01-01 9:00:00"),
-      //         //     new Date("2023-03-31 12:00:00")
-      //         //   );
-
-      //         //   var daylist = getDaysArray(
-      //         //     new Date(start_date_time),
-      //         //     new Date(end_date_time),
-      //         //     session_name,
-      //         //     resources_id
-      //         //   );
-
-      //         //console.log(daylist);
-
-      //         console.log("hii");
-
-      //         jsondt.push(
-      //           getDaysArray(
-      //             new Date(start_date_time),
-      //             new Date("2024-01-01 12:00:00"),
-      //             session_name,
-      //             resources_id
-      //           )
-      //         );
-      //       });
-      //     }
-      //   });
-
-      console.log(jsondt);
-
-      console.log(daily);
-
-      //   const jsondt = [];
-      //   //console.log(results);
-      //   for (let key in results) {
-      //     var itreatsessions = results[key];
-      //     //console.log(itreatsessions);
-      //     const session_name = itreatsessions.Session_Name;
-      //     //console.log(session_name);
-      //     const timeSlots = itreatsessions.All_Time;
-      //     //console.log(timeSlots);
-      //     const timeslotslength = timeSlots.length;
-      //     //console.log(timeslotslength);
-      //     for (var i = 0; i < timeslotslength; i++) {
-      //       const resources_id = timeSlots[i].ID;
-      //       //console.log("resource_id : ", resources_id);
-      //       const start_date_time =
-      //         timeSlots[i].start_date + " " + timeSlots[i].time_from;
-      //       const end_date_time =
-      //         timeSlots[i].end_date + " " + timeSlots[i].time_to;
-
-      //   console.log(start_date_time);
-      //   console.log(end_date_time);
-
-      //   var daylist = getDaysArray(
-      //     new Date("2023-01-01 9:00:00"),
-      //     new Date("2023-03-31 12:00:00")
-      //   );
-
-      //   var daylist = getDaysArray(
-      //     new Date(start_date_time),
-      //     new Date(end_date_time),
-      //     session_name,
-      //     resources_id
-      //   );
-
-      //console.log(daylist);
-
-      //       jsondt.push(
-      //         getDaysArray(
-      //           new Date(start_date_time),
-      //           new Date(end_date_time),
-      //           session_name,
-      //           resources_id
-      //         )
-      //       );
-      //     }
-      //   }
-      //   console.log(jsondt);
+        console.log(res);
+      }
+      // E.g. trigger via timeout after 5 seconds
+      setTimeout(loadDelayed, 5000);
     </script>
   </body>
 </html>
